@@ -28,11 +28,9 @@ function loadData(){
 		var id = 0;
 		resp.forEach(function(d){
 
-			//find all attachments from each card (it works only if we have 1 attachment)
-			var imageUrl;
 			Trello.get('cards/' +d.id+ '/attachments', function(attachments){
 				// Use the data that we need with handlebars
-				var context = { "id": id, "title": d.name, "body": d.desc };
+				var context = { "title": d.name, "desc": d.desc };
 				var html = templateScript(context);
 				// Insert the HTML code into the page
 				$("#entry-template").append(html);
@@ -42,6 +40,7 @@ function loadData(){
 			})
 			  
 			id++;
+			console.log(id);
 		})
 
       	lastId = countId = id; //count is equal with the last id given
@@ -63,10 +62,6 @@ function openFormatModal(){
 	//open modal
 	$('#modalFormat').modal('open');
 
-	//find the children with class resizeimg and get the src attribute
-	trigerUrl = $(modalTriger).find('.resizeimg').attr('src');
-	$('#image_url').val(trigerUrl);
-
 	// find the children with class card-title and get the value
 	trigerTitle = $(modalTriger).find('.card-title').text();
 	$('#image_title').val(trigerTitle);
@@ -79,9 +74,6 @@ function openFormatModal(){
 
 //format modal
 function formatCard(){
-	//find the children with class resizeimg and set the src attribute
-	$(modalTriger).find('.resizeimg')
-								.attr( 'src',$('#image_url').val() );
 	// // find the children with class card-title and set the value
 	$(modalTriger).find('.card-title')
 								.text( $('#image_title').val() );
@@ -96,8 +88,6 @@ function formatCard(){
 
 
 function clearData(){
-	 $('#add_image_url').val('');
-	 $('#add_image_url').off( "focus" );
 	 $('#add_image_title').val('');
 	 $('#add_image_title').off( "focus" );
 	 $('#add_image_description').val('');
@@ -106,7 +96,7 @@ function clearData(){
 
 //add pagination and listeners
 function loadPagination(cnt){
-	const cardsPerPage = 8;
+	const cardsPerPage = 4;
 	var howManyPages = Math.ceil( cnt / cardsPerPage );
 
 	//set always on start p1 active and visible 

@@ -13,13 +13,6 @@
   height: 100%
 }
 
-.idDiv {
-  float: left;
-  position: relative;
-  left: 10px;
-  top: 0px;
-}
-
 .card-title{
   text-shadow: 0 0 1px #000000;
 }
