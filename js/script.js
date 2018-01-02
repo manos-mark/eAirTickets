@@ -24,7 +24,7 @@ function loadData(){
 	templateScript = Handlebars.compile(template);
 
 	//find all cards from Cards List
-	Trello.get("/lists/" + '5a22e582182a8984a90ebcdb' + "/cards", function (resp) {
+	Trello.get("/lists/" + '5a22dff14bbbf07dff16afc4' + "/cards", function (resp) {
 		var id = 0;
 		resp.forEach(function(d){
 
@@ -32,16 +32,13 @@ function loadData(){
 			var imageUrl;
 			Trello.get('cards/' +d.id+ '/attachments', function(attachments){
 				// Use the data that we need with handlebars
-				var context = { "id": id, "title": d.name, "body": d.desc, "image": attachments[0].url };
+				var context = { "id": id, "title": d.name, "body": d.desc };
 				var html = templateScript(context);
 				// Insert the HTML code into the page
 				$("#entry-template").append(html);
 				//append the new card
 				$("#main").append(html);
-				//if image does not exist then use an error image
-				$("img").on('error', function() { 
-					$(this).attr("src", 'http://indembassy.com.vn/images/error.png');
-				});
+				
 			})
 			  
 			id++;
