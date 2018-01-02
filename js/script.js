@@ -7,7 +7,7 @@ $(document).ready(function() {
 	$('.modal').modal();
 
 	//add action listeners to card buttons 
-	$( "div.container" ).on('click','a.modal-triger.yellow', openFormatModal);
+	$( "div.container" ).on('click','a.modal-triger', openFormatModal);
 	
 	//add action listeners to modals buttons
 	$('#formatButton').on('click', formatCard);
@@ -40,7 +40,6 @@ function loadData(){
 			})
 			  
 			id++;
-			console.log(id);
 		})
 
       	lastId = countId = id; //count is equal with the last id given
