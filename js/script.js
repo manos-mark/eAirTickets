@@ -7,16 +7,11 @@ $(document).ready(function() {
 	$('.modal').modal();
 
 	//add action listeners to card buttons 
-	$( "div.container" ).on('click','a.modal-triger.red', openDeleteModal);
 	$( "div.container" ).on('click','a.modal-triger.yellow', openFormatModal);
 	
 	//add action listeners to modals buttons
-	$('#deleteButton').on('click', deleteCard);
 	$('#formatButton').on('click', formatCard);
 
-	//add action listener to my-fixed-button
-	$('#my-fixed-button a').on('click', openNewModal);
-	$('#createButton').on('click', createNewModal);	
 });
 
 
@@ -62,25 +57,6 @@ function loadData(){
 }
 
 
-//open delete modal
-function openDeleteModal(){
-	//find which element trigered the modal 
-	//$(this) is the button
-	//find the root parent 
-	modalTriger = $(this).parents('.card').parent();
-	// //open modal
-	$('#modalDelete').modal('open');
-}
-
-//remove card 
-function deleteCard(){
-	$(modalTriger).remove();
-	Materialize.toast('Card ' + modalTriger.attr('id') + ' Deleted!', 4000);
-	$('#count').text(--countId);//decrease count and display
-}
-
-
-
 //open format modal
 function openFormatModal(){
 	//find which element trigered the modal 
@@ -121,37 +97,6 @@ function formatCard(){
 }
 
 
-
-//open new card modal
-function openNewModal(){
-	clearData();
-	//open modal
-	$('#modalNew').modal('open');
-}
-
-function createNewModal(){
-
-	//get the input from the modal
-	var  getImage = $('#add_image_url').val();
-	var getAuthor = $('#add_image_title').val();
-	var getQuote = $('#add_image_description').val();
-
-	var context = { "id": lastId++ ,"title":getAuthor, "body":getQuote, "image":getImage };
-	var html = templateScript(context);
-
-	//append the new card
-	$("#main").append(html);
-	//if image does not exist then use an error image
-	$("img").on('error', function() { 
-		$(this).attr("src", 'http://indembassy.com.vn/images/error.png');
-	});
-
-	//set the quotes count 
-	$('#count').text(++countId);
-	Materialize.toast('New Card ' + lastId + ' Created!', 4000);
-	//----Clear data-----//
-	clearData();
-}
 
 function clearData(){
 	 $('#add_image_url').val('');
