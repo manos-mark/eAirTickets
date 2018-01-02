@@ -138,7 +138,6 @@ function loadPagination(cnt){
 			}
 
 		});
-		// console.log('range: '+(i*cardsPerPage-cardsPerPage)+' '+(i*cardsPerPage-1));	
 	}
 
 	//if there is only one page set right arrow disable
