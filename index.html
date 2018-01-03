@@ -37,14 +37,20 @@
 						</div>
 					</div>
 				</div> -->
-		        <div id="{{id}}" class="offset-s1 col s10 m6 l4 xl3 cell">
+		        <div id="{{id}}" class="offset-s1 col s10 m6 l4 xl3">
 		          <div class="card hoverable teal lighten-4">
 		            <div class="card-content teal-text text-lighten-1">
-		              <span class="card-title">{{title}}</span>
-		              <p>{{desc}}</p>
+		              <span class="card-title flight">{{flight}}</span>
+		              <p>{{date}}</p>
+		              <p>{{company}}</p>
+		              <p>{{hours}}</p>
+		              <p>{{code}}</p>
+		              <p>{{price}}</p>
+		              <p>{{avaliability}}</p>
 		            </div>
 		            <div class="card-action">
-		              <a class="btn modal-triger">Buy!</a>
+		            	<input id="ticketsCount" type="number" min="1" max="100" value ="1">
+		              	<a class="btn modal-triger">Buy!</a>
 		            </div>
 		          </div>
 		        </div>
@@ -61,22 +67,43 @@
 		        	<form class="col s12">
 		          		<div class="row modal-form-row">
 		            		<div class="input-field offset-s1 col s10">
-		              			<input value="image_value" id="image_url" type="text" class="validate">
-		              			<label for="image_url">Image URL</label>
+		              			<input value="" id="sname" type="text" class="validate">
+		              			<label for="sname">Surname</label>
 		            		</div>
 		          		</div>
 		          		<div class="row">
 				            <div class="input-field offset-s1 col s10">
-				            	<input value="author_value" id="image_title" type="text" class="validate">
-				              	<label for="image_title">Author</label>
+				            	<input value="" id="name" type="text" class="validate">
+				              	<label for="name">Name</label>
 				            </div>
 		          		</div>       
 						<div class="row">
 							<div class="input-field offset-s1 col s10">
-						  		<textarea id="image_description" type="text" class="materialize-textarea validate">Not Found</textarea>
-							  	<label for="image_description">Quote</label>
-							</div>
-						</div>             
+				            	<input value="" id="bdate" type="text" class="validate">
+				              	<label for="bdate">Birth Date</label>
+				            </div>
+						</div>   
+						<div class="row">
+							<div class="input-field offset-s1 col s10">
+				            	<input value="" id="pass_num" type="text" class="validate">
+				              	<label for="pass_num">Passport Number</label>
+				            </div>
+						</div>  
+						<div class="row">
+							<div class="input-field offset-s1 col s10">
+				            	<h6 id="flight_code">change</h6>
+				            </div>
+						</div>  
+						<div class="row">
+							<div class="input-field offset-s1 col s10">
+								<h6 id="seats_count">change</h6>
+				            </div>
+						</div>  
+						<div class="row">
+							<div class="input-field offset-s1 col s10">
+				            	<h6 id="price">change</h6>
+				            </div>
+						</div>            
 		        	</form>
 		      	</div>
 		    </div>
@@ -104,6 +131,8 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <!-- import custom js script-->
     <script type="text/javascript" src="js/script.js"></script>
+    <!-- import pagination js script-->
+    <script type="text/javascript" src="js/pagination.js"></script>
      <!--
          import Trello client.js
          script to authenticate yourself in order to use Trello API

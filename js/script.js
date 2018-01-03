@@ -7,10 +7,10 @@ $(document).ready(function() {
 	$('.modal').modal();
 
 	//add action listeners to card buttons 
-	$( "div.container" ).on('click','a.modal-triger', openFormatModal);
+	$( "div.container" ).on('click','a.modal-triger', openModal);
 	
 	//add action listeners to modals buttons
-	$('#formatButton').on('click', formatCard);
+	$('#formatButton').on('click', submitModal);
 
 });
 
@@ -19,9 +19,9 @@ $(document).ready(function() {
 //collect data from Json and display cards
 function loadData(){
 	// Retrieve the template data from the HTML (jQuery is used here).
-	template = $('#entry-template').html();
+	var template = $('#entry-template').html();
 	// Compile the template loadData into a function
-	templateScript = Handlebars.compile(template);
+	var templateScript = Handlebars.compile(template);
 
 	//find all cards from Cards List
 	Trello.get("/lists/" + '5a22dff14bbbf07dff16afc4' + "/cards", function (resp) {
@@ -29,8 +29,10 @@ function loadData(){
 		resp.forEach(function(d){
 
 			Trello.get('cards/' +d.id+ '/attachments', function(attachments){
+				var infos = d.name.split(',');
+
 				// Use the data that we need with handlebars
-				var context = { "title": d.name, "desc": d.desc };
+				var context = { "flight": infos[0], "date":infos[2], "company":infos[4], "hours":infos[3], "code":infos[5], "price":infos[1], "avaliability": d.desc };
 				var html = templateScript(context);
 				// Insert the HTML code into the page
 				$("#entry-template").append(html);
@@ -53,7 +55,7 @@ function loadData(){
 
 
 //open format modal
-function openFormatModal(){
+function openModal(){
 	//find which element trigered the modal 
 	//find the root parent 
 	modalTriger = $(this).parents('.card').parent();
@@ -61,123 +63,33 @@ function openFormatModal(){
 	//open modal
 	$('#modalFormat').modal('open');
 
-	// find the children with class card-title and get the value
-	trigerTitle = $(modalTriger).find('.card-title').text();
-	$('#image_title').val(trigerTitle);
+	// // find the children with class flight and get the value
+	// var trigerTitle = $(modalTriger).find('.flight').text();
+	// $('#image_title').val(trigerTitle);
 
-	//find the children with class card-content and get the text
-	trigerContent = $(modalTriger).find('.card-content').children().text();
-	$('#image_description').val(trigerContent);
+	// //find the children with class card-content and get the text
+	// var trigerContent = $(modalTriger).find('.card-content').children().text();
+	// $('#image_description').val(trigerContent);
 
 }
 
 //format modal
-function formatCard(){
-	// // find the children with class card-title and set the value
-	$(modalTriger).find('.card-title')
-								.text( $('#image_title').val() );
-	// //find the children with class card-content and set the text	
-	$(modalTriger).find('.card-content').children()
-								.text( $('#image_description').val() );
+function submitModal(){
+	// // // find the children with class card-title and set the value
+	// $(modalTriger).find('.card-title')
+	// 							.text( $('#image_title').val() );
+	// // //find the children with class card-content and set the text	
+	// $(modalTriger).find('.card-content').children()
+	// 							.text( $('#image_description').val() );
 
-	Materialize.toast('Card ' + modalTriger.attr('id') + ' Formated!', 4000);	
+	// Materialize.toast('Card ' + modalTriger.attr('id') + ' Formated!', 4000);	
 
 }
-
-
 
 function clearData(){
-	 $('#add_image_title').val('');
-	 $('#add_image_title').off( "focus" );
-	 $('#add_image_description').val('');
-	 $('#add_image_description').off( "focus" );
-}
-
-//add pagination and listeners
-function loadPagination(cnt){
-	const cardsPerPage = 4;
-	var howManyPages = Math.ceil( cnt / cardsPerPage );
-
-	//set always on start p1 active and visible 
-	$('#body').on('click', '#p1', function(){
-			setActive($(this));
-			setCardsInvisible();
-			setCardsVisible(0, cardsPerPage-1);
-			$('#leftArrow').addClass('disabled');
-	});
-
-	//add rest list elements and listeners
-	for( let i=2; i<=howManyPages; i++){//let keyword makes the i variable local to the loop instead of global
-		$('.pagination').append('<li class=".page waves-effect"><a id=p' +i+ ' href="#">' +i+ '</a></li>');
-		
-		$('#body').on('click', '#p'+i,function(){
-			
-			setActive($(this));
-			setCardsInvisible();
-			setCardsVisible(i*cardsPerPage-cardsPerPage, i*cardsPerPage-1);
-			$('#leftArrow').removeClass('disabled');
-			
-			if( $(this).attr('id') == 'p'+howManyPages ){//if this is the last page
-				$('#rightArrow').addClass('disabled');
-			}else{
-				$('#rightArrow').removeClass('disabled');
-			}
-
-		});
-	}
-
-	//if there is only one page set right arrow disable
-	if( $('.pagination li').length == 2){// 3 li (two arrows and one page)
-		$('rightArrow').addClass('disabled');
-	}else{
-		$('rightArrow').removeClass('disabled');
-	}
-
-	//triger to reveal the first 20 elements
-	$('#p1').click();
-	
-	//left arrow listener
-	$('#body').on('click', '#leftArrow', function(){
-		if( !$(this).hasClass('disabled') ){
-			var currentActive = $(this).siblings('.active');
-			$(currentActive).removeClass('active');
-			$(currentActive).prev().addClass('active');
-			$(currentActive).prev().children().click();
-		}
-	});
-
-	//right arrow listener
-	$('#body').on('click', '#rightArrow', function(){
-		if( !$(this).hasClass('disabled') ){
-			var currentActive = $(this).siblings('.active');
-			$(currentActive).removeClass('active');
-			$(currentActive).next().addClass('active');
-			$(currentActive).next().children().click();
-		}
-	});
-
-	//add the right arrow
-	$('.pagination').append('<li id="rightArrow" class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>');
-	
-
-	function setActive(p){
-		$(p).parent().addClass('active');
-		$(p).parent().siblings().removeClass('active');
-	}
-
-	function setCardsVisible(min,max){
-		$('.cell').each(function(i,obj){
-			if( $(obj).attr('id')>=min && $(obj).attr('id')<=max ){
-				$(obj).fadeIn('slow');
-			}
-		});
-	}
-
-	function setCardsInvisible(){
-		$('.cell').each(function(i,obj){
-			$(obj).fadeOut('slow');
-		});
-	}
-
+	 // $('#add_image_title').val('');
+	 // $('#add_image_title').off( "focus" );
+	 // $('#add_image_description').val('');
+	 // $('#add_image_description').off( "focus" );
 }
 
