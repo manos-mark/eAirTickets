@@ -44,12 +44,12 @@
 		              <p>{{date}}</p>
 		              <p>{{company}}</p>
 		              <p>{{hours}}</p>
-		              <p>{{code}}</p>
-		              <p>{{price}}</p>
-		              <p>{{avaliability}}</p>
+		              <p class="flight_code">{{code}}</p>
+		              <p class="price">{{price}}</p>
+		              <p class="avaliability">{{avaliability}}</p>
+		              <input class="ticketsCount" type="number" min="1" max="100" value ="1">
 		            </div>
 		            <div class="card-action">
-		            	<input id="ticketsCount" type="number" min="1" max="100" value ="1">
 		              	<a class="btn modal-triger">Buy!</a>
 		            </div>
 		          </div>
@@ -60,57 +60,61 @@
 
 		<!-- Format Modal Structure -->
 		<div id="modalFormat" class="modal teal lighten-4">
-			<div class="modal-content">
-		      	<h4 class="teal-text darken-4">Buy Ticket</h4>
+			<form>
+				<div class="modal-content">
+			      	<h4 class="teal-text darken-4">Buy Ticket</h4>
 
-		      	<div class="row">
-		        	<form class="col s12">
-		          		<div class="row modal-form-row">
-		            		<div class="input-field offset-s1 col s10">
-		              			<input value="" id="sname" type="text" class="validate">
-		              			<label for="sname">Surname</label>
-		            		</div>
-		          		</div>
-		          		<div class="row">
-				            <div class="input-field offset-s1 col s10">
-				            	<input value="" id="name" type="text" class="validate">
-				              	<label for="name">Name</label>
-				            </div>
-		          		</div>       
-						<div class="row">
-							<div class="input-field offset-s1 col s10">
-				            	<input value="" id="bdate" type="text" class="validate">
-				              	<label for="bdate">Birth Date</label>
-				            </div>
-						</div>   
-						<div class="row">
-							<div class="input-field offset-s1 col s10">
-				            	<input value="" id="pass_num" type="text" class="validate">
-				              	<label for="pass_num">Passport Number</label>
-				            </div>
-						</div>  
-						<div class="row">
-							<div class="input-field offset-s1 col s10">
-				            	<h6 id="flight_code">change</h6>
-				            </div>
-						</div>  
-						<div class="row">
-							<div class="input-field offset-s1 col s10">
-								<h6 id="seats_count">change</h6>
-				            </div>
-						</div>  
-						<div class="row">
-							<div class="input-field offset-s1 col s10">
-				            	<h6 id="price">change</h6>
-				            </div>
-						</div>            
-		        	</form>
-		      	</div>
-		    </div>
-		    <div class="modal-footer teal lighten-5">
-				<a id="formatButton" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-				<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-		    </div>
+			      	<div class="row">
+			        	<!-- <form class="col s12"> -->
+		        		<div class="col s12">
+			          		<div class="row modal-form-row">
+			            		<div class="input-field offset-s1 col s10">
+			              			<input value="" id="sname" type="text" class="validate" required>
+			              			<label for="sname">Surname</label>
+			            		</div>
+			          		</div>
+			          		<div class="row">
+					            <div class="input-field offset-s1 col s10">
+					            	<input value="" id="name" type="text" class="validate" required>
+					              	<label for="name">Name</label>
+					            </div>
+			          		</div>       
+							<div class="row">
+								<div class="offset-s1 col s10">
+									<label for="datepicker">Birth Date</label>
+					            	<input id="datepicker" type="date" class="validate" value="2000-01-01" max="2000-12-31" required>
+					            </div>
+							</div>   
+							<div class="row">
+								<div class="input-field offset-s1 col s10">
+					            	<input value="" id="pass_num" type="text" class="validate" required>
+					              	<label for="pass_num">Passport Number</label>
+					            </div>
+							</div>  
+							<div class="row teal-text darken-4">
+								<div class="offset-s1 col s10">
+					            	<h6 id="flight_code"></h6>
+					            </div>
+							</div>  
+							<div class="row teal-text darken-4">
+								<div class="offset-s1 col s10">
+									<h6 id="seats_count"></h6>
+					            </div>
+							</div>  
+							<div class="row teal-text darken-4">
+								<div class="offset-s1 col s10">
+					            	<h6 id="price"></h6>
+					            </div>
+							</div>   
+						</div>         
+			        	<!-- </form> -->
+			      	</div>
+			    </div>
+			    <div class="modal-footer teal lighten-5">
+					<button id="formatButton" class="modal-action waves-effect waves-green btn-flat" type="submit">Continue</button>
+					<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </form>
 		</div>    
 
 	</div>
@@ -133,6 +137,8 @@
     <script type="text/javascript" src="js/script.js"></script>
     <!-- import pagination js script-->
     <script type="text/javascript" src="js/pagination.js"></script>
+    <!-- import validations js script-->
+    <script type="text/javascript" src="js/validations.js"></script>
      <!--
          import Trello client.js
          script to authenticate yourself in order to use Trello API

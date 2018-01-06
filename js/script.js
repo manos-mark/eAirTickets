@@ -54,42 +54,48 @@ function loadData(){
 }
 
 
-//open format modal
+//open modal
 function openModal(){
-	//find which element trigered the modal 
-	//find the root parent 
-	modalTriger = $(this).parents('.card').parent();
+	//clear previous data
+	clearData();
+
+	//find which element trigered the modal
+	var modalTriger = $(this).parents('.card').parent();
 
 	//open modal
 	$('#modalFormat').modal('open');
 
-	// // find the children with class flight and get the value
-	// var trigerTitle = $(modalTriger).find('.flight').text();
-	// $('#image_title').val(trigerTitle);
+	//set the values on modal
+	var code = $(modalTriger).find('.flight_code').text();
+	$('#flight_code').text('Flight Code: ' + code);
 
-	// //find the children with class card-content and get the text
-	// var trigerContent = $(modalTriger).find('.card-content').children().text();
-	// $('#image_description').val(trigerContent);
-
+	var price = $(modalTriger).find('.price').text().substr(2);//remove euro
+	var ticketsCount = $(modalTriger).find('.ticketsCount').val();
+	$('#seats_count').text('Total Tickets: ' + ticketsCount);
+	$('#price').text('Total Cost: ' + price*ticketsCount +'€'); 
 }
 
-//format modal
+//submit modal
 function submitModal(){
-	// // // find the children with class card-title and set the value
-	// $(modalTriger).find('.card-title')
-	// 							.text( $('#image_title').val() );
-	// // //find the children with class card-content and set the text	
-	// $(modalTriger).find('.card-content').children()
-	// 							.text( $('#image_description').val() );
+	// var bdate = $('#datepicker').val();
+	
+	// if( validateAge(bdate) ){
+		
+	// }else{
+
+	// }
 
 	// Materialize.toast('Card ' + modalTriger.attr('id') + ' Formated!', 4000);	
-
 }
 
 function clearData(){
-	 // $('#add_image_title').val('');
-	 // $('#add_image_title').off( "focus" );
-	 // $('#add_image_description').val('');
-	 // $('#add_image_description').off( "focus" );
+	$('#sname').val('');
+	$('#sname').off("focus");
+	$('#name').val('');
+	$('#name').off("focus");
+	$('#datepicker').val('');
+	$('#datepicker').off("focus");	
+	$('#pass_num').val(''); 
+	$('#pass_num').off("focus");
 }
 
