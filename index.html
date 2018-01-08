@@ -44,9 +44,10 @@
 		              <p>{{date}}</p>
 		              <p>{{company}}</p>
 		              <p>{{hours}}</p>
-		              <p class="flight_code">{{code}}</p>
+		              <p class="flight_code hide">{{code}}</p>
 		              <p class="price">{{price}}</p>
-		              <p class="avaliability">{{avaliability}}</p>
+		              <p class="avaliability hide">{{avaliability}}</p>
+		              <p><br>Quantity:</p>
 		              <input class="ticketsCount" type="number" min="1" max="100" value ="1">
 		            </div>
 		            <div class="card-action">
@@ -59,7 +60,7 @@
 		</div>
 
 		<!-- Format Modal Structure -->
-		<div id="modalFormat" class="modal teal lighten-4">
+		<div id="infoModal" class="modal teal lighten-4">
 			<form>
 				<div class="modal-content">
 			      	<h4 class="teal-text darken-4">Buy Ticket</h4>
@@ -81,7 +82,7 @@
 			          		</div>       
 							<div class="row">
 								<div class="offset-s1 col s10">
-									<label for="datepicker">Birth Date</label>
+									<label for="datepicker">Birthdate</label>
 					            	<input id="datepicker" type="date" class="validate" value="2000-01-01" max="2000-12-31" required>
 					            </div>
 							</div>   
@@ -115,7 +116,30 @@
 					<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
 			    </div>
 		    </form>
-		</div>    
+		</div>   
+
+		<!-- Final Modal Structure -->
+		<div id="visaModal" class="modal teal lighten-4">
+			<form>
+				<div class="modal-content">
+			      	<h4 class="teal-text darken-4">Confirm Visa</h4>
+			      	<div class="row">
+		        		<div class="col s12">
+			          		<div class="row modal-form-row">
+			            		<div class="input-field offset-s1 col s10">
+			              			<input value="" id="visa" type="text" class="validate" required>
+			              			<label for="visa">Visa Code</label>
+			            		</div>
+			          		</div>
+						</div>         
+			      	</div>
+			    </div>
+			    <div class="modal-footer teal lighten-5">
+					<button id="confirmButton" class="modal-action waves-effect waves-green btn-flat" type="submit">Confirm</button>
+					<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </form>
+		</div> 
 
 	</div>
 
@@ -133,12 +157,11 @@
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>    
     <!-- import Materialize js script -->
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <!-- import custom js script-->
+    <!-- import custom js scripts-->
     <script type="text/javascript" src="js/script.js"></script>
-    <!-- import pagination js script-->
     <script type="text/javascript" src="js/pagination.js"></script>
-    <!-- import validations js script-->
     <script type="text/javascript" src="js/validations.js"></script>
+    <script type="text/javascript" src="js/modal-methods.js"></script>
      <!--
          import Trello client.js
          script to authenticate yourself in order to use Trello API

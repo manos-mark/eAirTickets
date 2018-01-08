@@ -7,12 +7,16 @@ $(document).ready(function() {
 	$('.modal').modal();
 
 	//add action listeners to card buttons 
-	$( "div.container" ).on('click','a.modal-triger', openModal);
+	$( "div.container" ).on('click','a.modal-triger', openInfoModal);
 	
 	//add action listeners to modals buttons
-	$('#formatButton').on('click', submitModal);
+	$('#formatButton').on('click', submitInfoModal);
+
+	//add action listeners to modals buttons
+	$('#confirmButton').on('click', submitVisaModal);
 
 });
+
 
 
 
@@ -53,49 +57,4 @@ function loadData(){
     }, function (error) { console.log("error:", error) });
 }
 
-
-//open modal
-function openModal(){
-	//clear previous data
-	clearData();
-
-	//find which element trigered the modal
-	var modalTriger = $(this).parents('.card').parent();
-
-	//open modal
-	$('#modalFormat').modal('open');
-
-	//set the values on modal
-	var code = $(modalTriger).find('.flight_code').text();
-	$('#flight_code').text('Flight Code: ' + code);
-
-	var price = $(modalTriger).find('.price').text().substr(2);//remove euro
-	var ticketsCount = $(modalTriger).find('.ticketsCount').val();
-	$('#seats_count').text('Total Tickets: ' + ticketsCount);
-	$('#price').text('Total Cost: ' + price*ticketsCount +'€'); 
-}
-
-//submit modal
-function submitModal(){
-	// var bdate = $('#datepicker').val();
-	
-	// if( validateAge(bdate) ){
-		
-	// }else{
-
-	// }
-
-	// Materialize.toast('Card ' + modalTriger.attr('id') + ' Formated!', 4000);	
-}
-
-function clearData(){
-	$('#sname').val('');
-	$('#sname').off("focus");
-	$('#name').val('');
-	$('#name').off("focus");
-	$('#datepicker').val('');
-	$('#datepicker').off("focus");	
-	$('#pass_num').val(''); 
-	$('#pass_num').off("focus");
-}
 
