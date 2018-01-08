@@ -1,171 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- import MD icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">    
-    <!-- import Materialize css -->
-    <link rel="stylesheet" href="css/materialize.min.css">
-    <!-- import custom css -->
-    <link rel="stylesheet" href="css/style.css">
-    <title>e-AirTickets</title>
-</head>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    
+	    <!-- import MD icons -->
+	    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">    
+	    <!-- import Materialize css -->
+	    <link rel="stylesheet" href="css/materialize.min.css">
+	    <!-- import custom css -->
+	    <link rel="stylesheet" href="css/style.css">
+	    <title>e-AirTickets</title>
+	</head>
 
-<div id='body' class="teal lighten-5">
-    <div class="container">
-		<div class="row grid" id="main">
-			
-			<!-- Quote Count -->
-			<h3 class="col s12 teal-text text-lighten-4">Flights: 
-				<span id="count"></span>
-			</h2>
+	<body class="teal lighten-5">
+	    <div class="container">
+			<div class="row" id="main">
+				
+				<!-- Quote Count -->
+				<!-- <h3 class="col s12 teal-text text-lighten-4">Flights: 
+					<span id="count"></span>
+				</h3> -->
 
-			<!-- CARD -->
-			<script id="entry-template" type="text/x-handlebars-template">
-				<!-- <div id="{{id}}" class="offset-s1 col s10 m6 l4 xl3 cell">
-					<div class="card hoverable">
-						<div class="card-image">
-							
-							<div class="idDiv teal-text text-lighten-2">#{{id}}</div>
-							<span class="card-title teal-text text-accent-3">{{title}}</span>
-						</div>
-						<div class="card-content teal lighten-4">
-					  		<p>{{body}}</p>
-						</div>
-					</div>
-				</div> -->
-		        <div id="{{id}}" class="offset-s1 col s10 m6 l4 xl3">
-		          <div class="card hoverable teal lighten-4">
-		            <div class="card-content teal-text text-lighten-1">
-		              <span class="card-title flight">{{flight}}</span>
-		              <p>{{date}}</p>
-		              <p>{{company}}</p>
-		              <p>{{hours}}</p>
-		              <p class="flight_code hide">{{code}}</p>
-		              <p class="price">{{price}}</p>
-		              <p class="avaliability hide">{{avaliability}}</p>
-		              <p><br>Quantity:</p>
-		              <input class="ticketsCount" type="number" min="1" max="100" value ="1">
-		            </div>
-		            <div class="card-action">
-		              	<a class="btn modal-triger">Buy!</a>
-		            </div>
-		          </div>
-		        </div>
-			</script> 
+				<!-- CARD -->
+				<!-- <script id="entry-template" type="text/x-handlebars-template">
+			        <div id="{{id}}" class="offset-s1 col s10 m6 l4 xl3 cell">
+			          <div class="card hoverable teal lighten-4">
+			            <div class="card-content teal-text text-lighten-1">
+			              <span class="card-title flight">{{flight}}</span>
+			              <p>{{date}}</p>
+			              <p>{{company}}</p>
+			              <p>{{hours}}</p>
+			              <p class="flight_code hide">{{code}}</p>
+			              <p class="price">{{price}}</p>
+			              <p class="avaliability hide">{{avaliability}}</p>
+			              <p><br>Quantity:</p>
+			              <input class="ticketsCount" type="number" min="1" max="100" value ="1">
+			            </div>
+			            <div class="card-action">
+			              	<a class="btn modal-triger">Buy!</a>
+			            </div>
+			          </div>
+			        </div>
+				</script>  -->
+			        <div class="offset-s1 col s10 m6 l4 xl3 cell">
+			          <div class="card">
+			            <div class="card-image">
+			              <img src="images/sample-1.jpg">
+			              <span class="card-title">Card Title</span>
+			            </div>
+			            <div class="card-content">
+			              <p>I am a very simple card. I am good at containing small bits of information.
+			              I am convenient because I require little markup to use effectively.</p>
+			            </div>
+			            <div class="card-action">
+			              <a href="#">This is a link</a>
+			            </div>
+			          </div>
+			        </div>
+			        
+            
+			</div>
+
+			<!-- Format Modal Structure -->
+			<div id="infoModal" class="modal teal lighten-4">
+				<form>
+					<div class="modal-content">
+				      	<h4 class="teal-text darken-4">Buy Ticket</h4>
+
+				      	<div class="row">
+				        	<!-- <form class="col s12"> -->
+			        		<div class="col s12">
+				          		<div class="row modal-form-row">
+				            		<div class="input-field offset-s1 col s10">
+				              			<input value="" id="sname" type="text" class="validate" required>
+				              			<label for="sname">Surname</label>
+				            		</div>
+				          		</div>
+				          		<div class="row">
+						            <div class="input-field offset-s1 col s10">
+						            	<input value="" id="name" type="text" class="validate" required>
+						              	<label for="name">Name</label>
+						            </div>
+				          		</div>       
+								<div class="row">
+									<div class="offset-s1 col s10">
+										<label for="datepicker">Birthdate</label>
+						            	<input id="datepicker" type="date" class="validate" value="2000-01-01" max="2000-12-31" required>
+						            </div>
+								</div>   
+								<div class="row">
+									<div class="input-field offset-s1 col s10">
+						            	<input value="" id="pass_num" type="text" class="validate" required>
+						              	<label for="pass_num">Passport Number</label>
+						            </div>
+								</div>  
+								<div class="row teal-text darken-4">
+									<div class="offset-s1 col s10">
+						            	<h6 id="flight_code"></h6>
+						            </div>
+								</div>  
+								<div class="row teal-text darken-4">
+									<div class="offset-s1 col s10">
+										<h6 id="seats_count"></h6>
+						            </div>
+								</div>  
+								<div class="row teal-text darken-4">
+									<div class="offset-s1 col s10">
+						            	<h6 id="price"></h6>
+						            </div>
+								</div>   
+							</div>         
+				        	<!-- </form> -->
+				      	</div>
+				    </div>
+				    <div class="modal-footer teal lighten-5">
+						<button id="formatButton" class="modal-action waves-effect waves-green btn-flat" type="submit">Continue</button>
+						<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+				    </div>
+			    </form>
+			</div>   
+
+			<!-- Visa Modal Structure -->
+			<div id="visaModal" class="modal teal lighten-4">
+				<form>
+					<div class="modal-content">
+				      	<h4 class="teal-text darken-4">Confirm Visa</h4>
+				      	<div class="row">
+			        		<div class="col s12">
+				          		<div class="row modal-form-row">
+				            		<div class="input-field offset-s1 col s10">
+				              			<input value="" id="visa" type="text" class="validate" required>
+				              			<label for="visa">Visa Code</label>
+				            		</div>
+				          		</div>
+							</div>         
+				      	</div>
+				    </div>
+				    <div class="modal-footer teal lighten-5">
+						<button id="confirmButton" class="modal-action waves-effect waves-green btn-flat" type="submit">Confirm</button>
+						<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+				    </div>
+			    </form>
+			</div> 
+
+			<!-- Final Modal Structure -->
+			<div id="alertModal" class="modal teal lighten-4">
+				<form>
+					<div class="modal-content">
+				      	<div class="row">
+			        		<div class="col s12">
+				          		<div class="row modal-form-row">
+				            		<div class="input-field offset-s1 col s10 teal-text darken-4">
+				              			<p></p>
+				            		</div>
+				          		</div>
+							</div>         
+				      	</div>
+				    </div>
+				    <div class="modal-footer teal lighten-5">
+						<button id="confirmButton" class="modal-action waves-effect waves-green btn-flat modal-close">OK</button>
+				    </div>
+			    </form>
+			</div> 
 
 		</div>
 
-		<!-- Format Modal Structure -->
-		<div id="infoModal" class="modal teal lighten-4">
-			<form>
-				<div class="modal-content">
-			      	<h4 class="teal-text darken-4">Buy Ticket</h4>
+		<!-- Pagination -->
+		<ul class="pagination center-align col s12">
+	    	<li id="leftArrow" class="waves-effect"><a href="#"><i class="material-icons">chevron_left</i></a></li>
+	    	<li class="active page waves-effect"><a id='p1' href="#">1</a></li>
+		</ul>
 
-			      	<div class="row">
-			        	<!-- <form class="col s12"> -->
-		        		<div class="col s12">
-			          		<div class="row modal-form-row">
-			            		<div class="input-field offset-s1 col s10">
-			              			<input value="" id="sname" type="text" class="validate" required>
-			              			<label for="sname">Surname</label>
-			            		</div>
-			          		</div>
-			          		<div class="row">
-					            <div class="input-field offset-s1 col s10">
-					            	<input value="" id="name" type="text" class="validate" required>
-					              	<label for="name">Name</label>
-					            </div>
-			          		</div>       
-							<div class="row">
-								<div class="offset-s1 col s10">
-									<label for="datepicker">Birthdate</label>
-					            	<input id="datepicker" type="date" class="validate" value="2000-01-01" max="2000-12-31" required>
-					            </div>
-							</div>   
-							<div class="row">
-								<div class="input-field offset-s1 col s10">
-					            	<input value="" id="pass_num" type="text" class="validate" required>
-					              	<label for="pass_num">Passport Number</label>
-					            </div>
-							</div>  
-							<div class="row teal-text darken-4">
-								<div class="offset-s1 col s10">
-					            	<h6 id="flight_code"></h6>
-					            </div>
-							</div>  
-							<div class="row teal-text darken-4">
-								<div class="offset-s1 col s10">
-									<h6 id="seats_count"></h6>
-					            </div>
-							</div>  
-							<div class="row teal-text darken-4">
-								<div class="offset-s1 col s10">
-					            	<h6 id="price"></h6>
-					            </div>
-							</div>   
-						</div>         
-			        	<!-- </form> -->
-			      	</div>
-			    </div>
-			    <div class="modal-footer teal lighten-5">
-					<button id="formatButton" class="modal-action waves-effect waves-green btn-flat" type="submit">Continue</button>
-					<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			    </div>
-		    </form>
-		</div>   
-
-		<!-- Final Modal Structure -->
-		<div id="visaModal" class="modal teal lighten-4">
-			<form>
-				<div class="modal-content">
-			      	<h4 class="teal-text darken-4">Confirm Visa</h4>
-			      	<div class="row">
-		        		<div class="col s12">
-			          		<div class="row modal-form-row">
-			            		<div class="input-field offset-s1 col s10">
-			              			<input value="" id="visa" type="text" class="validate" required>
-			              			<label for="visa">Visa Code</label>
-			            		</div>
-			          		</div>
-						</div>         
-			      	</div>
-			    </div>
-			    <div class="modal-footer teal lighten-5">
-					<button id="confirmButton" class="modal-action waves-effect waves-green btn-flat" type="submit">Confirm</button>
-					<a href="#!" class="red white-text modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			    </div>
-		    </form>
-		</div> 
-
-	</div>
-
-	<!-- Pagination -->
-	<ul class="pagination center-align col s12">
-    	<li id="leftArrow" class="waves-effect"><a href="#"><i class="material-icons">chevron_left</i></a></li>
-    	<li class="active page waves-effect"><a id='p1' href="#">1</a></li>
-	</ul>
-    <!-- ##################################################################################################### -->
-    <!-- ## Leave these scripts as the last part of body tag. Do NOT place any HTML content below this line ## -->
-    <!-- ##################################################################################################### -->
-    <!-- import Handlebars js script-->
-    <script type="text/javascript" src="js/handlebars-v4.0.11.js"></script>
-    <!-- import jQuery -->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>    
-    <!-- import Materialize js script -->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <!-- import custom js scripts-->
-    <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/pagination.js"></script>
-    <script type="text/javascript" src="js/validations.js"></script>
-    <script type="text/javascript" src="js/modal-methods.js"></script>
-     <!--
-         import Trello client.js
-         script to authenticate yourself in order to use Trello API
-    -->
-    <script src="https://trello.com/1/client.js?key=806939987b9834d83a8eff9a716e49b7&token=ea74a66fe484ec83a9c5a444c512c5bc6bd61ec6a72c9922674044dacf7c706f"></script> 
-</div>
+	    <!-- import Handlebars js script-->
+	    <script type="text/javascript" src="js/handlebars-v4.0.11.js"></script>
+	    <!-- import jQuery -->
+	    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>    
+	    <!-- import Materialize js script -->
+	    <script type="text/javascript" src="js/materialize.min.js"></script>
+	    <!-- import custom js scripts-->
+	    <script type="text/javascript" src="js/script.js"></script>
+	    <script type="text/javascript" src="js/pagination.js"></script>
+	    <script type="text/javascript" src="js/validations.js"></script>
+	    <script type="text/javascript" src="js/modal-methods.js"></script>
+	     <!--
+	         import Trello client.js
+	         script to authenticate yourself in order to use Trello API
+	    -->
+	    <script src="https://trello.com/1/client.js?key=806939987b9834d83a8eff9a716e49b7&token=ea74a66fe484ec83a9c5a444c512c5bc6bd61ec6a72c9922674044dacf7c706f"></script> 
+	</body>
 </html>

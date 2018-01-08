@@ -20,7 +20,8 @@ function openInfoModal(){
 		$('#seats_count').text('Total Tickets: ' + ticketsCount);
 		$('#price').text('Total Cost: ' + price*ticketsCount +'€'); 
 	}else{
-		alert('Sorry, the number of tickets you requested is not available.');
+		$('#alertModal').find('p').text('Sorry, the number of tickets you requested is not available.');
+		$('#alertModal').modal('open');
 	}
 
 	
@@ -43,9 +44,13 @@ function submitInfoModal(){
 function submitVisaModal(){
 	//NSA check if code is valid
 	if( visaCheck($('#visa').val()) ){
-		
+		$('#visaModal').modal('close');
+		$('#alertModal').find('p').text("Your flight code is "+Math.random().toString().substring(2));
+		$('#alertModal').modal('open');
 	}else{
-
+		$('#visaModal').modal('close');
+		$('#alertModal').find('p').text("Visa Code is not valid!");
+		$('#alertModal').modal('open');
 	}
 }
 

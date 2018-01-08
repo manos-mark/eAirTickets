@@ -13,6 +13,8 @@ function availabilityCheck(modalTriger,ticketsCount){
 }
 
 function visaCheck(code){
-	console.log(code);
-	return true;	
+	if(code.length === 9){
+		return true;
+	}
+	return false;	
 }
