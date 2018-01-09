@@ -10,12 +10,10 @@ $(document).ready(function() {
 	$( "div.container" ).on('click','a.modal-triger', openInfoModal);
 	
 	//add action listeners to modals buttons
-	// $('#formatButton').on('click', submitInfoModal);
 	var infoForm = $('#infoModal').children();
 	$(infoForm).submit(submitInfoModal);
 
 	//add action listeners to modals buttons
-	// $('#confirmButton').on('click', submitVisaModal);
 	var visaForm = $('#visaModal').children();
 	$(visaForm).submit(submitVisaModal);
 });
