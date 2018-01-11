@@ -4,17 +4,19 @@ function openInfoModal(){
 	clearData();
 
 	//find which element trigered the modal
-	var modalTriger = $(this).parents('.card').parent();
+	modalTriger = $(this).parents('.card').parent();
 	//get the values from html
 	var code = $(modalTriger).find('.flight_code').text();
 	var price = $(modalTriger).find('.price').text().substr(2);//remove euro
 	var ticketsCount = $(modalTriger).find('.ticketsCount').val();
-	
+	var path = $(modalTriger).find('.flight').text();
+
 	//if requested tickets are available
 	if( availabilityCheck(modalTriger,ticketsCount) ){
 		//open modal
 		$('#infoModal').modal('open');
 		//set the values on modal
+		$('#path').html(path);
 		$('#flight_code').html(code);
 		$('#seats_count').html(ticketsCount);
 		$('#price').html(price*ticketsCount); 
@@ -44,42 +46,69 @@ function submitInfoModal(){
 async function submitVisaModal(){
 	//NSA check if code is valid
 	if( visaCheck($('#visa').val()) ){
+
 		//change values on modal
 		$('#visaModal').modal('close');
-		$('#alertModal').find('h5').text("Your flight code is ");
-		$('#alertModal').find('p').html(Math.random().toString().substring(2));
+		$('#alertModal').find('h5').html("Confirmation completed succesfully!<br>");
+		$('#alertModal').find('p').html(
+				'Flight: ' + $('#path').text() + '<br>' 
+				+ 'Surname: ' + $('#sname').val() + '<br>'  
+				+ 'Firstname: ' + $('#name').val() + '<br>' 
+				+ 'Birth date: ' + $('#datepicker').val() + '<br>' 
+				+ 'Passport number: ' + $('#pass_num').val() + '<br>' 
+				+ 'Flight code: ' + $('#flight_code').text() + '<br>'
+				+ 'Total tickets: ' + $('#seats_count').text() + '<br>'
+				+ 'Price: ' + $('#price').text() + '<br>'
+				+ 'Visa code: ' + $('#visa').val() + '<br>'
+				+ 'Flight code: ' + Math.random().toString().substring(2)
+		);
 		$('#alertModal').modal('open');
+
 		//change availability on Trello
-		// var cards = await findCards();
-		// Trello.put("/cards/" + cards[modalTriger.attr('id')].id, { 
-		// 	desc:''
-		// });
+		var cards = await findCards();
+		var avaliability = $(modalTriger).find('.avaliability').text().substr(16);
+		console.log( parseInt(avaliability) - parseInt($('#seats_count').text()) );
+		Trello.put("/cards/" + cards[modalTriger.attr('id')].id, { 
+			desc:'Available Seats:'+ ( parseInt(avaliability) - parseInt($('#seats_count').text()) ) +'/100'
+		});
+
 		//add ticket on Trello's list 
 		Trello.post("/cards/", { 
-			name: 'sname ' + $('#sname').val() + ', '  
+			name: 'Flight: ' + $('#path').text() + ', ' 
+				+ 'sname ' + $('#sname').val() + ', '  
 				+ 'name ' + $('#name').val() + ', ' 
 				+ 'bdate ' + $('#datepicker').val() + ', ' 
 				+ 'pass_num ' + $('#pass_num').val() + ', ' 
 				+ 'flight_code ' + $('#flight_code').text() + ', '
 				+ 'seats_count ' + $('#seats_count').text() + ', '
 				+ 'price ' + $('#price').text() + ', '
-				+ 'visa ' + $('#visa').val(), 
+				+ 'visa ' + $('#visa').val() + ', '
+				+ 'Flight code: ' + Math.random().toString().substring(2), 
 			desc: 'accepted',
 			idList: '5a542a603da9420338791f93'
 		});
-	}else{
+	}
+	else{
+		//change values on modal
 		$('#visaModal').modal('close');
-		$('#alertModal').find('h5').text("Visa Code is not valid!");
-		$('#alertModal').find('p').html('');
+		$('#alertModal').find('h5').html("Confirmation was not succesfull!<br>");
+		$('#alertModal').find('p').html(
+				'Flight: ' + $('#path').text() + '<br>' 
+				+ 'Surname: ' + $('#sname').val() + '<br>'  
+				+ 'Firstname: ' + $('#name').val() + '<br>' 
+				+ 'Birth date: ' + $('#datepicker').val() + '<br>' 
+				+ 'Passport number: ' + $('#pass_num').val() + '<br>' 
+				+ 'Flight code: ' + $('#flight_code').text() + '<br>'
+				+ 'Total tickets: ' + $('#seats_count').text() + '<br>'
+				+ 'Price: ' + $('#price').text() + '<br>'
+				+ 'Visa code: ' + $('#visa').val() + '<br>'
+		);
 		$('#alertModal').modal('open');
-		//change availability on Trello
-		// var cards = await findCards();
-		// Trello.put("/cards/" + cards[modalTriger.attr('id')].id, { 
-		// 	desc:''
-		// });
+
 		//add ticket on Trello's list 
 		Trello.post("/cards/", { 
-			name: 'sname ' + $('#sname').val() + ', '  
+			name: 'Flight: ' + $('#path').text() + ', '
+				+ 'sname ' + $('#sname').val() + ', '  
 				+ 'name ' + $('#name').val() + ', ' 
 				+ 'bdate ' + $('#datepicker').val() + ', ' 
 				+ 'pass_num ' + $('#pass_num').val() + ',' 

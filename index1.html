@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    
+	    <!-- import Materialize css -->
+	    <link rel="stylesheet" href="css/materialize.min.css">
+	    <!-- import custom css -->
+	    <link rel="stylesheet" type="text/css" href="css/style.css">   
+	    <!-- import MD icons -->
+	    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
+	    <title>e-AirTickets</title>
+	</head>
+
+	<body class="teal lighten-5">
+	    <div class="container row">
+	    	<!-- Departure -->
+	    	<div class="offset-s col s5 center">
+				<!-- Dropdown Trigger -->
+				<a class='dropdown-button btn' href='#' data-activates='departure'>departure</a>
+				<p id='depCity' class='text-center teal-text text-lighten-1'>Departure City: </p>
+		    	<!-- Dropdown Structure -->
+				<ul id='departure' class='dropdown-content'>
+				</ul>
+				<p class='text-center bigSpace teal-text text-lighten-1'>Departure Date:</p>
+			</div>
+			
+			<!-- Arrival -->
+	    	<div class="offset-s1 col s5 center">
+				<!-- Dropdown Trigger -->
+				<a class='dropdown-button btn' href='#' data-activates='arrival'>arrival</a>
+				<p id='arrCity' class='text-center teal-text text-lighten-1'>Arrival City: </p>
+		    	<!-- Dropdown Structure -->
+				<ul id='arrival' class='dropdown-content'>
+				</ul>
+				<p class='text-center bigSpace teal-text text-lighten-1'>Arrival Date:</p>
+			</div>
+			<input id='depDate' class='offset-s1 col s3' type='date'>
+			<input id='arrDate' class='offset-s3 col s3' type='date'>
+			<a type='submit' class='changeIndex btn offset-s4 col s3 smallSpace' href='index.html'>continue</a>
+
+	    </div>
+	    <!-- import Handlebars js script-->
+	    <script type="text/javascript" src="js/handlebars-v4.0.11.js"></script>
+	    <!-- import jQuery -->
+	    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>    
+	    <!-- import Materialize js script -->
+	    <script type="text/javascript" src="js/materialize.min.js"></script>
+	    <!-- import custom js scripts-->
+	    <script type="text/javascript" src="js/script1.js"></script>
+	    <!--
+	         import Trello client.js
+	         script to authenticate yourself in order to use Trello API
+	    -->
+	    <script src="https://trello.com/1/client.js?key=806939987b9834d83a8eff9a716e49b7&token=ea74a66fe484ec83a9c5a444c512c5bc6bd61ec6a72c9922674044dacf7c706f"></script> 
+    </body>
+</html>
